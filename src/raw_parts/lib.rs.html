@@ -415,7 +415,7 @@
     <span class="doccomment">/// the source vector.</span>
     <span class="kw">pub</span> <span class="ident">ptr</span>: <span class="kw-2">*mut</span> <span class="ident">T</span>,
     <span class="doccomment">/// The number of elements in the source vector, also referred to as its</span>
-    <span class="doccomment">/// &#39;length&#39;.</span>
+    <span class="doccomment">/// &quot;length&quot;.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This value is the same as the value returned by [`Vec::len`] in the</span>
     <span class="doccomment">/// source vector.</span>
@@ -585,8 +585,8 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">roundtrip</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capa = 100</span>
-        <span class="ident">vec</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// len = 9</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capacity is 100</span>
+        <span class="ident">vec</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9</span>
 
         <span class="kw">let</span> <span class="ident">raw_parts</span> <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">vec</span>);
         <span class="kw">let</span> <span class="ident">raw_ptr</span> <span class="op">=</span> <span class="ident">raw_parts</span>.<span class="ident">ptr</span>;
@@ -600,8 +600,8 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_vec_sets_ptr</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capa = 100</span>
-        <span class="ident">vec</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// len = 9</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capacity is 100</span>
+        <span class="ident">vec</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9</span>
         <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">vec</span>.<span class="ident">as_mut_ptr</span>();
 
         <span class="kw">let</span> <span class="ident">raw_parts</span> <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">vec</span>);
@@ -610,8 +610,8 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_vec_sets_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capa = 100</span>
-        <span class="ident">vec</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// len = 9</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capacity is 100</span>
+        <span class="ident">vec</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9</span>
 
         <span class="kw">let</span> <span class="ident">raw_parts</span> <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">vec</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">raw_parts</span>.<span class="ident">length</span>, <span class="number">9</span>);
@@ -619,8 +619,8 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_vec_sets_capacity</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capa = 100</span>
-        <span class="ident">vec</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// len = 9</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capacity is 100</span>
+        <span class="ident">vec</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9</span>
 
         <span class="kw">let</span> <span class="ident">raw_parts</span> <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">vec</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">raw_parts</span>.<span class="ident">capacity</span>, <span class="number">100</span>);
