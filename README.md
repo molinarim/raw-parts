@@ -23,7 +23,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-raw-parts = "1.0"
+raw-parts = "1.1"
 ```
 
 Then decompose `Vec<T>`s like:
@@ -50,7 +50,7 @@ assert_eq!(rebuilt, [4294967295, 0, 1]);
 
 raw-parts is `no_std` compatible with a required dependency on [`alloc`].
 
-### Minimum Supported Rust Version
+## Minimum Supported Rust Version
 
 This crate requires at least Rust 1.56.0. This version can be bumped in minor
 releases.
