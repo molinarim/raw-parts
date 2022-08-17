@@ -414,421 +414,421 @@
 <span id="414">414</span>
 <span id="415">415</span>
 <span id="416">416</span>
-</pre><pre class="rust"><code><span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::all</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::pedantic</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::cargo</span>)]</span>
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::option_if_let_else</span>)]</span>
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unknown_lints</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">missing_docs</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">missing_debug_implementations</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">missing_copy_implementations</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">rust_2018_idioms</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">rust_2021_compatibility</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">trivial_casts</span>, <span class="ident">trivial_numeric_casts</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">unsafe_op_in_unsafe_fn</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">unused_qualifications</span>)]</span>
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">variant_size_differences</span>)]</span>
-<span class="comment">// Enable feature callouts in generated documentation:</span>
-<span class="comment">// https://doc.rust-lang.org/beta/unstable-book/language-features/doc-cfg.html</span>
-<span class="comment">//</span>
-<span class="comment">// This approach is borrowed from tokio.</span>
-<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">docsrs</span>, <span class="ident">feature</span>(<span class="ident">doc_cfg</span>))]</span>
-<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">docsrs</span>, <span class="ident">feature</span>(<span class="ident">doc_alias</span>))]</span>
+</pre><pre class="rust"><code><span class="attribute">#![warn(clippy::all)]</span>
+<span class="attribute">#![warn(clippy::pedantic)]</span>
+<span class="attribute">#![warn(clippy::cargo)]</span>
+<span class="attribute">#![allow(clippy::option_if_let_else)]</span>
+<span class="attribute">#![allow(unknown_lints)]</span>
+<span class="attribute">#![warn(missing_docs)]</span>
+<span class="attribute">#![warn(missing_debug_implementations)]</span>
+<span class="attribute">#![warn(missing_copy_implementations)]</span>
+<span class="attribute">#![warn(rust_2018_idioms)]</span>
+<span class="attribute">#![warn(rust_2021_compatibility)]</span>
+<span class="attribute">#![warn(trivial_casts, trivial_numeric_casts)]</span>
+<span class="attribute">#![warn(unsafe_op_in_unsafe_fn)]</span>
+<span class="attribute">#![warn(unused_qualifications)]</span>
+<span class="attribute">#![warn(variant_size_differences)]</span>
+<span class="comment">// Enable feature callouts in generated documentation:
+// https://doc.rust-lang.org/beta/unstable-book/language-features/doc-cfg.html
+//
+// This approach is borrowed from tokio.
+</span><span class="attribute">#![cfg_attr(docsrs, feature(doc_cfg))]</span>
+<span class="attribute">#![cfg_attr(docsrs, feature(doc_alias))]</span>
 
-<span class="doccomment">//! A wrapper around the decomposed parts of a `Vec&lt;T&gt;`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This crate defines a struct that contains the `Vec`&#39;s internal pointer,</span>
-<span class="doccomment">//! length, and allocated capacity.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! [`RawParts`] makes [`Vec::from_raw_parts`] and [`Vec::into_raw_parts`] easier</span>
-<span class="doccomment">//! to use by giving names to the returned values. This prevents errors from</span>
-<span class="doccomment">//! mixing up the two `usize` values of length and capacity.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # Examples</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//! use raw_parts::RawParts;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! let v: Vec&lt;i32&gt; = vec![-1, 0, 1];</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! let RawParts { ptr, length, capacity } = RawParts::from_vec(v);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! let rebuilt = unsafe {</span>
-<span class="doccomment">//!     // We can now make changes to the components, such as</span>
-<span class="doccomment">//!     // transmuting the raw pointer to a compatible type.</span>
-<span class="doccomment">//!     let ptr = ptr as *mut u32;</span>
-<span class="doccomment">//!     let raw_parts = RawParts { ptr, length, capacity };</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     RawParts::into_vec(raw_parts)</span>
-<span class="doccomment">//! };</span>
-<span class="doccomment">//! assert_eq!(rebuilt, [4294967295, 0, 1]);</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # `no_std`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! raw-parts is `no_std` compatible with a required dependency on [`alloc`].</span>
+<span class="doccomment">//! A wrapper around the decomposed parts of a `Vec&lt;T&gt;`.
+//!
+//! This crate defines a struct that contains the `Vec`&#39;s internal pointer,
+//! length, and allocated capacity.
+//!
+//! [`RawParts`] makes [`Vec::from_raw_parts`] and [`Vec::into_raw_parts`] easier
+//! to use by giving names to the returned values. This prevents errors from
+//! mixing up the two `usize` values of length and capacity.
+//!
+//! # Examples
+//!
+//! ```
+//! use raw_parts::RawParts;
+//!
+//! let v: Vec&lt;i32&gt; = vec![-1, 0, 1];
+//!
+//! let RawParts { ptr, length, capacity } = RawParts::from_vec(v);
+//!
+//! let rebuilt = unsafe {
+//!     // We can now make changes to the components, such as
+//!     // transmuting the raw pointer to a compatible type.
+//!     let ptr = ptr as *mut u32;
+//!     let raw_parts = RawParts { ptr, length, capacity };
+//!
+//!     RawParts::into_vec(raw_parts)
+//! };
+//! assert_eq!(rebuilt, [4294967295, 0, 1]);
+//! ```
+//!
+//! # `no_std`
+//!
+//! raw-parts is `no_std` compatible with a required dependency on [`alloc`].
 
-<span class="attribute">#![<span class="ident">no_std</span>]</span>
-<span class="attribute">#![<span class="ident">doc</span>(<span class="ident">html_root_url</span> <span class="op">=</span> <span class="string">&quot;https://docs.rs/raw-parts/1.1.1&quot;</span>)]</span>
+</span><span class="attribute">#![no_std]</span>
+<span class="attribute">#![doc(html_root_url = <span class="string">&quot;https://docs.rs/raw-parts/1.1.1&quot;</span>)]</span>
 
-<span class="comment">// Ensure code blocks in `README.md` compile</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">doctest</span>)]</span>
-<span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]</span>
-<span class="kw">mod</span> <span class="ident">readme</span> {}
+<span class="comment">// Ensure code blocks in `README.md` compile
+</span><span class="attribute">#[cfg(doctest)]</span>
+<span class="attribute">#[doc = <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]</span>
+<span class="kw">mod </span>readme {}
 
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">alloc</span>;
+<span class="kw">extern crate </span>alloc;
 
-<span class="kw">use</span> <span class="ident">alloc::vec::Vec</span>;
-<span class="kw">use</span> <span class="ident">core::fmt</span>;
-<span class="kw">use</span> <span class="ident">core::hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
-<span class="kw">use</span> <span class="ident">core::mem::ManuallyDrop</span>;
+<span class="kw">use </span>alloc::vec::Vec;
+<span class="kw">use </span>core::fmt;
+<span class="kw">use </span>core::hash::{Hash, Hasher};
+<span class="kw">use </span>core::mem::ManuallyDrop;
 
-<span class="doccomment">/// A wrapper around the decomposed parts of a `Vec&lt;T&gt;`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This struct contains the `Vec`&#39;s internal pointer, length, and allocated</span>
-<span class="doccomment">/// capacity.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// `RawParts` makes [`Vec::from_raw_parts`] and [`Vec::into_raw_parts`] easier</span>
-<span class="doccomment">/// to use by giving names to the returned values. This prevents errors from</span>
-<span class="doccomment">/// mixing up the two `usize` values of length and capacity.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// use raw_parts::RawParts;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let v: Vec&lt;i32&gt; = vec![-1, 0, 1];</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let RawParts { ptr, length, capacity } = RawParts::from_vec(v);</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let rebuilt = unsafe {</span>
-<span class="doccomment">///     // We can now make changes to the components, such as</span>
-<span class="doccomment">///     // transmuting the raw pointer to a compatible type.</span>
-<span class="doccomment">///     let ptr = ptr as *mut u32;</span>
-<span class="doccomment">///     let raw_parts = RawParts { ptr, length, capacity };</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     RawParts::into_vec(raw_parts)</span>
-<span class="doccomment">/// };</span>
-<span class="doccomment">/// assert_eq!(rebuilt, [4294967295, 0, 1]);</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RawParts</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// A non-null pointer to a buffer of `T`.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This pointer is the same as the value returned by [`Vec::as_mut_ptr`] in</span>
-    <span class="doccomment">/// the source vector.</span>
-    <span class="kw">pub</span> <span class="ident">ptr</span>: <span class="kw-2">*mut</span> <span class="ident">T</span>,
-    <span class="doccomment">/// The number of elements in the source vector, also referred to as its</span>
-    <span class="doccomment">/// &quot;length&quot;.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This value is the same as the value returned by [`Vec::len`] in the</span>
-    <span class="doccomment">/// source vector.</span>
-    <span class="kw">pub</span> <span class="ident">length</span>: <span class="ident">usize</span>,
-    <span class="doccomment">/// The number of elements the source vector can hold without reallocating.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This value is the same as the value returned by [`Vec::capacity`] in the</span>
-    <span class="doccomment">/// source vector.</span>
-    <span class="kw">pub</span> <span class="ident">capacity</span>: <span class="ident">usize</span>,
+<span class="doccomment">/// A wrapper around the decomposed parts of a `Vec&lt;T&gt;`.
+///
+/// This struct contains the `Vec`&#39;s internal pointer, length, and allocated
+/// capacity.
+///
+/// `RawParts` makes [`Vec::from_raw_parts`] and [`Vec::into_raw_parts`] easier
+/// to use by giving names to the returned values. This prevents errors from
+/// mixing up the two `usize` values of length and capacity.
+///
+/// # Examples
+///
+/// ```
+/// use raw_parts::RawParts;
+///
+/// let v: Vec&lt;i32&gt; = vec![-1, 0, 1];
+///
+/// let RawParts { ptr, length, capacity } = RawParts::from_vec(v);
+///
+/// let rebuilt = unsafe {
+///     // We can now make changes to the components, such as
+///     // transmuting the raw pointer to a compatible type.
+///     let ptr = ptr as *mut u32;
+///     let raw_parts = RawParts { ptr, length, capacity };
+///
+///     RawParts::into_vec(raw_parts)
+/// };
+/// assert_eq!(rebuilt, [4294967295, 0, 1]);
+/// ```
+</span><span class="kw">pub struct </span>RawParts&lt;T&gt; {
+    <span class="doccomment">/// A non-null pointer to a buffer of `T`.
+    ///
+    /// This pointer is the same as the value returned by [`Vec::as_mut_ptr`] in
+    /// the source vector.
+    </span><span class="kw">pub </span>ptr: <span class="kw-2">*mut </span>T,
+    <span class="doccomment">/// The number of elements in the source vector, also referred to as its
+    /// &quot;length&quot;.
+    ///
+    /// This value is the same as the value returned by [`Vec::len`] in the
+    /// source vector.
+    </span><span class="kw">pub </span>length: usize,
+    <span class="doccomment">/// The number of elements the source vector can hold without reallocating.
+    ///
+    /// This value is the same as the value returned by [`Vec::capacity`] in the
+    /// source vector.
+    </span><span class="kw">pub </span>capacity: usize,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RawParts</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Decompose a `Vec&lt;T&gt;` into its raw components.</span>
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">vec</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::from_vec</span>(<span class="ident">vec</span>)
+<span class="kw">impl</span>&lt;T&gt; From&lt;Vec&lt;T&gt;&gt; <span class="kw">for </span>RawParts&lt;T&gt; {
+    <span class="doccomment">/// Decompose a `Vec&lt;T&gt;` into its raw components.
+    </span><span class="kw">fn </span>from(vec: Vec&lt;T&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::from_vec(vec)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">RawParts</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="ident">fmt</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;RawParts&quot;</span>)
-            .<span class="ident">field</span>(<span class="string">&quot;ptr&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">ptr</span>)
-            .<span class="ident">field</span>(<span class="string">&quot;length&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">length</span>)
-            .<span class="ident">field</span>(<span class="string">&quot;capacity&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">capacity</span>)
-            .<span class="ident">finish</span>()
+<span class="kw">impl</span>&lt;T&gt; fmt::Debug <span class="kw">for </span>RawParts&lt;T&gt; {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; fmt::Result {
+        fmt.debug_struct(<span class="string">&quot;RawParts&quot;</span>)
+            .field(<span class="string">&quot;ptr&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.ptr)
+            .field(<span class="string">&quot;length&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.length)
+            .field(<span class="string">&quot;capacity&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.capacity)
+            .finish()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">RawParts</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">ptr</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">ptr</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">length</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">length</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">capacity</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">capacity</span>
+<span class="kw">impl</span>&lt;T&gt; PartialEq <span class="kw">for </span>RawParts&lt;T&gt; {
+    <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
+        <span class="self">self</span>.ptr == other.ptr &amp;&amp; <span class="self">self</span>.length == other.length &amp;&amp; <span class="self">self</span>.capacity == other.capacity
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Eq</span> <span class="kw">for</span> <span class="ident">RawParts</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span>&lt;T&gt; Eq <span class="kw">for </span>RawParts&lt;T&gt; {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Hash</span> <span class="kw">for</span> <span class="ident">RawParts</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;mut</span> <span class="ident">H</span>) {
-        <span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">hash</span>(<span class="ident">state</span>);
-        <span class="self">self</span>.<span class="ident">length</span>.<span class="ident">hash</span>(<span class="ident">state</span>);
-        <span class="self">self</span>.<span class="ident">capacity</span>.<span class="ident">hash</span>(<span class="ident">state</span>);
+<span class="kw">impl</span>&lt;T&gt; Hash <span class="kw">for </span>RawParts&lt;T&gt; {
+    <span class="kw">fn </span>hash&lt;H: Hasher&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, state: <span class="kw-2">&amp;mut </span>H) {
+        <span class="self">self</span>.ptr.hash(state);
+        <span class="self">self</span>.length.hash(state);
+        <span class="self">self</span>.capacity.hash(state);
     }
 }
 
-<span class="comment">// Do not implement the `From` trait in the other direction since `crate::from`</span>
-<span class="comment">// is an unsafe function.</span>
-<span class="comment">//</span>
-<span class="comment">// ```</span>
-<span class="comment">// impl&lt;T&gt; From&lt;RawParts&lt;T&gt;&gt; for Vec&lt;T&gt; {</span>
-<span class="comment">//     fn from(raw_parts: RawParts&lt;T&gt;) -&gt; Self {</span>
-<span class="comment">//         // ERROR: this requires `unsafe`, which we don&#39;t want to hide in a</span>
-<span class="comment">//         // `From` impl.</span>
-<span class="comment">//         from(raw_parts)</span>
-<span class="comment">//     }</span>
-<span class="comment">// }</span>
+<span class="comment">// Do not implement the `From` trait in the other direction since `crate::from`
+// is an unsafe function.
+//
+// ```
+// impl&lt;T&gt; From&lt;RawParts&lt;T&gt;&gt; for Vec&lt;T&gt; {
+//     fn from(raw_parts: RawParts&lt;T&gt;) -&gt; Self {
+//         // ERROR: this requires `unsafe`, which we don&#39;t want to hide in a
+//         // `From` impl.
+//         from(raw_parts)
+//     }
+// }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">RawParts</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Construct the raw components of a `Vec&lt;T&gt;` by decomposing it.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Returns a struct containing the raw pointer to the underlying data, the</span>
-    <span class="doccomment">/// length of the vector (in elements), and the allocated capacity of the</span>
-    <span class="doccomment">/// data (in elements).</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// After calling this function, the caller is responsible for the memory</span>
-    <span class="doccomment">/// previously managed by the `Vec`. The only way to do this is to convert</span>
-    <span class="doccomment">/// the raw pointer, length, and capacity back into a `Vec` with the</span>
-    <span class="doccomment">/// [`Vec::from_raw_parts`] function or the [`into_vec`] function, allowing</span>
-    <span class="doccomment">/// the destructor to perform the cleanup.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [`into_vec`]: Self::into_vec</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use raw_parts::RawParts;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let v: Vec&lt;i32&gt; = vec![-1, 0, 1];</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let RawParts { ptr, length, capacity } = RawParts::from_vec(v);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let rebuilt = unsafe {</span>
-    <span class="doccomment">///     // We can now make changes to the components, such as</span>
-    <span class="doccomment">///     // transmuting the raw pointer to a compatible type.</span>
-    <span class="doccomment">///     let ptr = ptr as *mut u32;</span>
-    <span class="doccomment">///     let raw_parts = RawParts { ptr, length, capacity };</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">///     RawParts::into_vec(raw_parts)</span>
-    <span class="doccomment">/// };</span>
-    <span class="doccomment">/// assert_eq!(rebuilt, [4294967295, 0, 1]);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_vec</span>(<span class="ident">vec</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="ident">RawParts</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="comment">// TODO: convert to `Vec::into_raw_parts` once it is stabilized.</span>
-        <span class="comment">// See: https://doc.rust-lang.org/1.56.0/src/alloc/vec/mod.rs.html#717-720</span>
-        <span class="comment">//</span>
-        <span class="comment">// https://github.com/rust-lang/rust/issues/65816</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">me</span> <span class="op">=</span> <span class="ident">ManuallyDrop::new</span>(<span class="ident">vec</span>);
-        <span class="kw">let</span> (<span class="ident">ptr</span>, <span class="ident">length</span>, <span class="ident">capacity</span>) <span class="op">=</span> (<span class="ident">me</span>.<span class="ident">as_mut_ptr</span>(), <span class="ident">me</span>.<span class="ident">len</span>(), <span class="ident">me</span>.<span class="ident">capacity</span>());
+</span><span class="kw">impl</span>&lt;T&gt; RawParts&lt;T&gt; {
+    <span class="doccomment">/// Construct the raw components of a `Vec&lt;T&gt;` by decomposing it.
+    ///
+    /// Returns a struct containing the raw pointer to the underlying data, the
+    /// length of the vector (in elements), and the allocated capacity of the
+    /// data (in elements).
+    ///
+    /// After calling this function, the caller is responsible for the memory
+    /// previously managed by the `Vec`. The only way to do this is to convert
+    /// the raw pointer, length, and capacity back into a `Vec` with the
+    /// [`Vec::from_raw_parts`] function or the [`into_vec`] function, allowing
+    /// the destructor to perform the cleanup.
+    ///
+    /// [`into_vec`]: Self::into_vec
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use raw_parts::RawParts;
+    ///
+    /// let v: Vec&lt;i32&gt; = vec![-1, 0, 1];
+    ///
+    /// let RawParts { ptr, length, capacity } = RawParts::from_vec(v);
+    ///
+    /// let rebuilt = unsafe {
+    ///     // We can now make changes to the components, such as
+    ///     // transmuting the raw pointer to a compatible type.
+    ///     let ptr = ptr as *mut u32;
+    ///     let raw_parts = RawParts { ptr, length, capacity };
+    ///
+    ///     RawParts::into_vec(raw_parts)
+    /// };
+    /// assert_eq!(rebuilt, [4294967295, 0, 1]);
+    /// ```
+    </span><span class="attribute">#[must_use]</span>
+    <span class="kw">pub fn </span>from_vec(vec: Vec&lt;T&gt;) -&gt; RawParts&lt;T&gt; {
+        <span class="comment">// TODO: convert to `Vec::into_raw_parts` once it is stabilized.
+        // See: https://doc.rust-lang.org/1.56.0/src/alloc/vec/mod.rs.html#717-720
+        //
+        // https://github.com/rust-lang/rust/issues/65816
+        </span><span class="kw">let </span><span class="kw-2">mut </span>me = ManuallyDrop::new(vec);
+        <span class="kw">let </span>(ptr, length, capacity) = (me.as_mut_ptr(), me.len(), me.capacity());
 
-        <span class="self">Self</span> {
-            <span class="ident">ptr</span>,
-            <span class="ident">length</span>,
-            <span class="ident">capacity</span>,
+        <span class="self">Self </span>{
+            ptr,
+            length,
+            capacity,
         }
     }
 
-    <span class="doccomment">/// Creates a `Vec&lt;T&gt;` directly from the raw components of another vector.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This function is declared as an associated function and must be called</span>
-    <span class="doccomment">/// as `RawParts::into_vec(raw_parts)`.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Safety</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This function has the same safety invariants as [`Vec::from_raw_parts`],</span>
-    <span class="doccomment">/// which are repeated in the following paragraphs.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This is highly unsafe, due to the number of invariants that aren&#39;t</span>
-    <span class="doccomment">/// checked:</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// * `ptr` needs to have been previously allocated via [`String`]/`Vec&lt;T&gt;`</span>
-    <span class="doccomment">///   (at least, it&#39;s highly likely to be incorrect if it wasn&#39;t).</span>
-    <span class="doccomment">/// * `T` needs to have the same size and alignment as what `ptr` was allocated with.</span>
-    <span class="doccomment">///   (`T` having a less strict alignment is not sufficient, the alignment really</span>
-    <span class="doccomment">///   needs to be equal to satisfy the [`dealloc`] requirement that memory must be</span>
-    <span class="doccomment">///   allocated and deallocated with the same layout.)</span>
-    <span class="doccomment">/// * `length` needs to be less than or equal to `capacity`.</span>
-    <span class="doccomment">/// * `capacity` needs to be the capacity that the pointer was allocated with.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Violating these may cause problems like corrupting the allocator&#39;s</span>
-    <span class="doccomment">/// internal data structures. For example it is **not** safe</span>
-    <span class="doccomment">/// to build a `Vec&lt;u8&gt;` from a pointer to a C `char` array with length `size_t`.</span>
-    <span class="doccomment">/// It&#39;s also not safe to build one from a `Vec&lt;u16&gt;` and its length, because</span>
-    <span class="doccomment">/// the allocator cares about the alignment, and these two types have different</span>
-    <span class="doccomment">/// alignments. The buffer was allocated with alignment 2 (for `u16`), but after</span>
-    <span class="doccomment">/// turning it into a `Vec&lt;u8&gt;` it&#39;ll be deallocated with alignment 1.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The ownership of `ptr` is effectively transferred to the</span>
-    <span class="doccomment">/// `Vec&lt;T&gt;` which may then deallocate, reallocate or change the</span>
-    <span class="doccomment">/// contents of memory pointed to by the pointer at will. Ensure</span>
-    <span class="doccomment">/// that nothing else uses the pointer after calling this</span>
-    <span class="doccomment">/// function.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [`String`]: alloc::string::String</span>
-    <span class="doccomment">/// [`dealloc`]: alloc::alloc::GlobalAlloc::dealloc</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use core::ptr;</span>
-    <span class="doccomment">/// use core::mem;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// use raw_parts::RawParts;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let v = vec![1, 2, 3];</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// // Pull out the various important pieces of information about `v`</span>
-    <span class="doccomment">/// let RawParts { ptr, length, capacity } = RawParts::from_vec(v);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// unsafe {</span>
-    <span class="doccomment">///     // Overwrite memory with 4, 5, 6</span>
-    <span class="doccomment">///     for i in 0..length as isize {</span>
-    <span class="doccomment">///         ptr::write(ptr.offset(i), 4 + i);</span>
-    <span class="doccomment">///     }</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">///     // Put everything back together into a Vec</span>
-    <span class="doccomment">///     let raw_parts = RawParts { ptr, length, capacity };</span>
-    <span class="doccomment">///     let rebuilt = RawParts::into_vec(raw_parts);</span>
-    <span class="doccomment">///     assert_eq!(rebuilt, [4, 5, 6]);</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::needless_pass_by_value</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">into_vec</span>(<span class="ident">this</span>: <span class="self">Self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="self">Self</span> {
-            <span class="ident">ptr</span>,
-            <span class="ident">length</span>,
-            <span class="ident">capacity</span>,
-        } <span class="op">=</span> <span class="ident">this</span>;
+    <span class="doccomment">/// Creates a `Vec&lt;T&gt;` directly from the raw components of another vector.
+    ///
+    /// This function is declared as an associated function and must be called
+    /// as `RawParts::into_vec(raw_parts)`.
+    ///
+    /// # Safety
+    ///
+    /// This function has the same safety invariants as [`Vec::from_raw_parts`],
+    /// which are repeated in the following paragraphs.
+    ///
+    /// This is highly unsafe, due to the number of invariants that aren&#39;t
+    /// checked:
+    ///
+    /// * `ptr` needs to have been previously allocated via [`String`]/`Vec&lt;T&gt;`
+    ///   (at least, it&#39;s highly likely to be incorrect if it wasn&#39;t).
+    /// * `T` needs to have the same size and alignment as what `ptr` was allocated with.
+    ///   (`T` having a less strict alignment is not sufficient, the alignment really
+    ///   needs to be equal to satisfy the [`dealloc`] requirement that memory must be
+    ///   allocated and deallocated with the same layout.)
+    /// * `length` needs to be less than or equal to `capacity`.
+    /// * `capacity` needs to be the capacity that the pointer was allocated with.
+    ///
+    /// Violating these may cause problems like corrupting the allocator&#39;s
+    /// internal data structures. For example it is **not** safe
+    /// to build a `Vec&lt;u8&gt;` from a pointer to a C `char` array with length `size_t`.
+    /// It&#39;s also not safe to build one from a `Vec&lt;u16&gt;` and its length, because
+    /// the allocator cares about the alignment, and these two types have different
+    /// alignments. The buffer was allocated with alignment 2 (for `u16`), but after
+    /// turning it into a `Vec&lt;u8&gt;` it&#39;ll be deallocated with alignment 1.
+    ///
+    /// The ownership of `ptr` is effectively transferred to the
+    /// `Vec&lt;T&gt;` which may then deallocate, reallocate or change the
+    /// contents of memory pointed to by the pointer at will. Ensure
+    /// that nothing else uses the pointer after calling this
+    /// function.
+    ///
+    /// [`String`]: alloc::string::String
+    /// [`dealloc`]: alloc::alloc::GlobalAlloc::dealloc
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use core::ptr;
+    /// use core::mem;
+    ///
+    /// use raw_parts::RawParts;
+    ///
+    /// let v = vec![1, 2, 3];
+    ///
+    /// // Pull out the various important pieces of information about `v`
+    /// let RawParts { ptr, length, capacity } = RawParts::from_vec(v);
+    ///
+    /// unsafe {
+    ///     // Overwrite memory with 4, 5, 6
+    ///     for i in 0..length as isize {
+    ///         ptr::write(ptr.offset(i), 4 + i);
+    ///     }
+    ///
+    ///     // Put everything back together into a Vec
+    ///     let raw_parts = RawParts { ptr, length, capacity };
+    ///     let rebuilt = RawParts::into_vec(raw_parts);
+    ///     assert_eq!(rebuilt, [4, 5, 6]);
+    /// }
+    /// ```
+    </span><span class="attribute">#[must_use]</span>
+    <span class="attribute">#[allow(clippy::needless_pass_by_value)]</span>
+    <span class="kw">pub unsafe fn </span>into_vec(this: <span class="self">Self</span>) -&gt; Vec&lt;T&gt; {
+        <span class="kw">let </span><span class="self">Self </span>{
+            ptr,
+            length,
+            capacity,
+        } = this;
 
-        <span class="comment">// Safety:</span>
-        <span class="comment">//</span>
-        <span class="comment">// The safety invariants that callers must uphold when calling `from` match</span>
-        <span class="comment">// the safety invariants of `Vec::from_raw_parts`.</span>
-        <span class="kw">unsafe</span> { <span class="ident">Vec::from_raw_parts</span>(<span class="ident">ptr</span>, <span class="ident">length</span>, <span class="ident">capacity</span>) }
+        <span class="comment">// Safety:
+        //
+        // The safety invariants that callers must uphold when calling `from` match
+        // the safety invariants of `Vec::from_raw_parts`.
+        </span><span class="kw">unsafe </span>{ Vec::from_raw_parts(ptr, length, capacity) }
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">alloc::format</span>;
-    <span class="kw">use</span> <span class="ident">alloc::vec::Vec</span>;
+<span class="attribute">#[cfg(test)]</span>
+<span class="kw">mod </span>tests {
+    <span class="kw">use </span>alloc::format;
+    <span class="kw">use </span>alloc::vec::Vec;
 
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::RawParts</span>;
+    <span class="kw">use </span><span class="kw">crate</span>::RawParts;
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">roundtrip</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capacity is 100</span>
-        <span class="ident">vec</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9</span>
+    <span class="attribute">#[test]</span>
+    <span class="kw">fn </span>roundtrip() {
+        <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
+        </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
 
-        <span class="kw">let</span> <span class="ident">raw_parts</span> <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">vec</span>);
-        <span class="kw">let</span> <span class="ident">raw_ptr</span> <span class="op">=</span> <span class="ident">raw_parts</span>.<span class="ident">ptr</span>;
+        </span><span class="kw">let </span>raw_parts = RawParts::from_vec(vec);
+        <span class="kw">let </span>raw_ptr = raw_parts.ptr;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">roundtripped_vec</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">RawParts::into_vec</span>(<span class="ident">raw_parts</span>) };
+        <span class="kw">let </span><span class="kw-2">mut </span>roundtripped_vec = <span class="kw">unsafe </span>{ RawParts::into_vec(raw_parts) };
 
-        <span class="macro">assert_eq!</span>(<span class="ident">roundtripped_vec</span>.<span class="ident">capacity</span>(), <span class="number">100</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">roundtripped_vec</span>.<span class="ident">len</span>(), <span class="number">9</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">roundtripped_vec</span>.<span class="ident">as_mut_ptr</span>(), <span class="ident">raw_ptr</span>);
+        <span class="macro">assert_eq!</span>(roundtripped_vec.capacity(), <span class="number">100</span>);
+        <span class="macro">assert_eq!</span>(roundtripped_vec.len(), <span class="number">9</span>);
+        <span class="macro">assert_eq!</span>(roundtripped_vec.as_mut_ptr(), raw_ptr);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">from_vec_sets_ptr</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capacity is 100</span>
-        <span class="ident">vec</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9</span>
-        <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">vec</span>.<span class="ident">as_mut_ptr</span>();
+    <span class="attribute">#[test]</span>
+    <span class="kw">fn </span>from_vec_sets_ptr() {
+        <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
+        </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
+        </span><span class="kw">let </span>ptr = vec.as_mut_ptr();
 
-        <span class="kw">let</span> <span class="ident">raw_parts</span> <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">vec</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">raw_parts</span>.<span class="ident">ptr</span>, <span class="ident">ptr</span>);
+        <span class="kw">let </span>raw_parts = RawParts::from_vec(vec);
+        <span class="macro">assert_eq!</span>(raw_parts.ptr, ptr);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">from_vec_sets_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capacity is 100</span>
-        <span class="ident">vec</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9</span>
+    <span class="attribute">#[test]</span>
+    <span class="kw">fn </span>from_vec_sets_length() {
+        <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
+        </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
 
-        <span class="kw">let</span> <span class="ident">raw_parts</span> <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">vec</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">raw_parts</span>.<span class="ident">length</span>, <span class="number">9</span>);
+        </span><span class="kw">let </span>raw_parts = RawParts::from_vec(vec);
+        <span class="macro">assert_eq!</span>(raw_parts.length, <span class="number">9</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">from_vec_sets_capacity</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capacity is 100</span>
-        <span class="ident">vec</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9</span>
+    <span class="attribute">#[test]</span>
+    <span class="kw">fn </span>from_vec_sets_capacity() {
+        <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
+        </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
 
-        <span class="kw">let</span> <span class="ident">raw_parts</span> <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">vec</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">raw_parts</span>.<span class="ident">capacity</span>, <span class="number">100</span>);
+        </span><span class="kw">let </span>raw_parts = RawParts::from_vec(vec);
+        <span class="macro">assert_eq!</span>(raw_parts.capacity, <span class="number">100</span>);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">debug_test</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capacity is 100</span>
-        <span class="ident">vec</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9</span>
-        <span class="kw">let</span> <span class="ident">raw_parts</span> <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">vec</span>);
+    <span class="attribute">#[test]</span>
+    <span class="kw">fn </span>debug_test() {
+        <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
+        </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
+        </span><span class="kw">let </span>raw_parts = RawParts::from_vec(vec);
 
         <span class="macro">assert_eq!</span>(
             <span class="macro">format!</span>(
                 <span class="string">&quot;RawParts {{ ptr: {:?}, length: 9, capacity: 100 }}&quot;</span>,
-                <span class="ident">raw_parts</span>.<span class="ident">ptr</span>
+                raw_parts.ptr
             ),
-            <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">raw_parts</span>)
+            <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, raw_parts)
         );
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">partial_eq_fail_pointer</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec_1</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capacity is 100</span>
-        <span class="ident">vec_1</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec_2</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capacity is 100</span>
-        <span class="ident">vec_2</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9</span>
+    <span class="attribute">#[test]</span>
+    <span class="kw">fn </span>partial_eq_fail_pointer() {
+        <span class="kw">let </span><span class="kw-2">mut </span>vec_1 = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
+        </span>vec_1.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
+        </span><span class="kw">let </span><span class="kw-2">mut </span>vec_2 = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
+        </span>vec_2.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
 
-        <span class="kw">let</span> <span class="ident">raw_parts_1</span> <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">vec_1</span>);
-        <span class="kw">let</span> <span class="ident">raw_parts_2</span> <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">vec_2</span>);
-        <span class="macro">assert_ne!</span>(<span class="ident">raw_parts_1</span>, <span class="ident">raw_parts_2</span>);
+        </span><span class="kw">let </span>raw_parts_1 = RawParts::from_vec(vec_1);
+        <span class="kw">let </span>raw_parts_2 = RawParts::from_vec(vec_2);
+        <span class="macro">assert_ne!</span>(raw_parts_1, raw_parts_2);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">partial_eq_fail_capacity</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec_1</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capacity is 100</span>
-        <span class="ident">vec_1</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec_2</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">101</span>); <span class="comment">// capacity is 101</span>
-        <span class="ident">vec_2</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9</span>
+    <span class="attribute">#[test]</span>
+    <span class="kw">fn </span>partial_eq_fail_capacity() {
+        <span class="kw">let </span><span class="kw-2">mut </span>vec_1 = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
+        </span>vec_1.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
+        </span><span class="kw">let </span><span class="kw-2">mut </span>vec_2 = Vec::with_capacity(<span class="number">101</span>); <span class="comment">// capacity is 101
+        </span>vec_2.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
 
-        <span class="kw">let</span> <span class="ident">raw_parts_1</span> <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">vec_1</span>);
-        <span class="kw">let</span> <span class="ident">raw_parts_2</span> <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">vec_2</span>);
-        <span class="macro">assert_ne!</span>(<span class="ident">raw_parts_1</span>, <span class="ident">raw_parts_2</span>);
+        </span><span class="kw">let </span>raw_parts_1 = RawParts::from_vec(vec_1);
+        <span class="kw">let </span>raw_parts_2 = RawParts::from_vec(vec_2);
+        <span class="macro">assert_ne!</span>(raw_parts_1, raw_parts_2);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">partial_eq_fail_length</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec_1</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capacity is 100</span>
-        <span class="ident">vec_1</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec_2</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capacity is 100</span>
-        <span class="ident">vec_2</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;12345678&quot;</span>); <span class="comment">// length is 8</span>
+    <span class="attribute">#[test]</span>
+    <span class="kw">fn </span>partial_eq_fail_length() {
+        <span class="kw">let </span><span class="kw-2">mut </span>vec_1 = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
+        </span>vec_1.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
+        </span><span class="kw">let </span><span class="kw-2">mut </span>vec_2 = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
+        </span>vec_2.extend_from_slice(<span class="string">b&quot;12345678&quot;</span>); <span class="comment">// length is 8
 
-        <span class="kw">let</span> <span class="ident">raw_parts_1</span> <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">vec_1</span>);
-        <span class="kw">let</span> <span class="ident">raw_parts_2</span> <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">vec_2</span>);
-        <span class="macro">assert_ne!</span>(<span class="ident">raw_parts_1</span>, <span class="ident">raw_parts_2</span>);
+        </span><span class="kw">let </span>raw_parts_1 = RawParts::from_vec(vec_1);
+        <span class="kw">let </span>raw_parts_2 = RawParts::from_vec(vec_2);
+        <span class="macro">assert_ne!</span>(raw_parts_1, raw_parts_2);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">partial_eq_pass</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vec</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">100</span>); <span class="comment">// capacity is 100</span>
-        <span class="ident">vec</span>.<span class="ident">extend_from_slice</span>(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9</span>
+    <span class="attribute">#[test]</span>
+    <span class="kw">fn </span>partial_eq_pass() {
+        <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
+        </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
 
-        <span class="kw">let</span> <span class="ident">RawParts</span> {
-            <span class="ident">ptr</span>,
-            <span class="ident">length</span>,
-            <span class="ident">capacity</span>,
-        } <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">vec</span>);
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">RawParts</span> {
-            <span class="ident">ptr</span>,
-            <span class="ident">length</span>,
-            <span class="ident">capacity</span>,
+        </span><span class="kw">let </span>RawParts {
+            ptr,
+            length,
+            capacity,
+        } = RawParts::from_vec(vec);
+        <span class="kw">let </span>a = RawParts {
+            ptr,
+            length,
+            capacity,
         };
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">RawParts</span> {
-            <span class="ident">ptr</span>,
-            <span class="ident">length</span>,
-            <span class="ident">capacity</span>,
+        <span class="kw">let </span>b = RawParts {
+            ptr,
+            length,
+            capacity,
         };
-        <span class="macro">assert_eq!</span>(<span class="ident">a</span>, <span class="ident">b</span>);
+        <span class="macro">assert_eq!</span>(a, b);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="raw_parts" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (34a6cae28 2022-08-09)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="raw_parts" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (86c6ebee8 2022-08-16)" ></div></body></html>

@@ -5,22 +5,22 @@ length, and allocated capacity.</p>
 to use by giving names to the returned values. This prevents errors from
 mixing up the two <code>usize</code> values of length and capacity.</p>
 <h2 id="examples"><a href="#examples">Examples</a></h2>
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">raw_parts::RawParts</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>raw_parts::RawParts;
 
-<span class="kw">let</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="op">-</span><span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>];
+<span class="kw">let </span>v: Vec&lt;i32&gt; = <span class="macro">vec!</span>[-<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>];
 
-<span class="kw">let</span> <span class="ident">RawParts</span> { <span class="ident">ptr</span>, <span class="ident">length</span>, <span class="ident">capacity</span> } <span class="op">=</span> <span class="ident">RawParts::from_vec</span>(<span class="ident">v</span>);
+<span class="kw">let </span>RawParts { ptr, length, capacity } = RawParts::from_vec(v);
 
-<span class="kw">let</span> <span class="ident">rebuilt</span> <span class="op">=</span> <span class="kw">unsafe</span> {
-    <span class="comment">// We can now make changes to the components, such as</span>
-    <span class="comment">// transmuting the raw pointer to a compatible type.</span>
-    <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">u32</span>;
-    <span class="kw">let</span> <span class="ident">raw_parts</span> <span class="op">=</span> <span class="ident">RawParts</span> { <span class="ident">ptr</span>, <span class="ident">length</span>, <span class="ident">capacity</span> };
+<span class="kw">let </span>rebuilt = <span class="kw">unsafe </span>{
+    <span class="comment">// We can now make changes to the components, such as
+    // transmuting the raw pointer to a compatible type.
+    </span><span class="kw">let </span>ptr = ptr <span class="kw">as </span><span class="kw-2">*mut </span>u32;
+    <span class="kw">let </span>raw_parts = RawParts { ptr, length, capacity };
 
-    <span class="ident">RawParts::into_vec</span>(<span class="ident">raw_parts</span>)
+    RawParts::into_vec(raw_parts)
 };
-<span class="macro">assert_eq!</span>(<span class="ident">rebuilt</span>, [<span class="number">4294967295</span>, <span class="number">0</span>, <span class="number">1</span>]);</code></pre></div>
+<span class="macro">assert_eq!</span>(rebuilt, [<span class="number">4294967295</span>, <span class="number">0</span>, <span class="number">1</span>]);</code></pre></div>
 <h2 id="no_std"><a href="#no_std"><code>no_std</code></a></h2>
 <p>raw-parts is <code>no_std</code> compatible with a required dependency on <a href="https://doc.rust-lang.org/nightly/alloc/index.html" title="alloc"><code>alloc</code></a>.</p>
 </div></details><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.RawParts.html" title="raw_parts::RawParts struct">RawParts</a></div><div class="item-right docblock-short"><p>A wrapper around the decomposed parts of a <code>Vec&lt;T&gt;</code>.</p>
-</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="raw_parts" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (34a6cae28 2022-08-09)" ></div></body></html>
+</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="raw_parts" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (86c6ebee8 2022-08-16)" ></div></body></html>
