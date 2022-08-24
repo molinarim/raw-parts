@@ -414,28 +414,28 @@
 <span id="414">414</span>
 <span id="415">415</span>
 <span id="416">416</span>
-</pre><pre class="rust"><code><span class="attribute">#![warn(clippy::all)]</span>
-<span class="attribute">#![warn(clippy::pedantic)]</span>
-<span class="attribute">#![warn(clippy::cargo)]</span>
-<span class="attribute">#![allow(clippy::option_if_let_else)]</span>
-<span class="attribute">#![allow(unknown_lints)]</span>
-<span class="attribute">#![warn(missing_docs)]</span>
-<span class="attribute">#![warn(missing_debug_implementations)]</span>
-<span class="attribute">#![warn(missing_copy_implementations)]</span>
-<span class="attribute">#![warn(rust_2018_idioms)]</span>
-<span class="attribute">#![warn(rust_2021_compatibility)]</span>
-<span class="attribute">#![warn(trivial_casts, trivial_numeric_casts)]</span>
-<span class="attribute">#![warn(unsafe_op_in_unsafe_fn)]</span>
-<span class="attribute">#![warn(unused_qualifications)]</span>
-<span class="attribute">#![warn(variant_size_differences)]</span>
-<span class="comment">// Enable feature callouts in generated documentation:
+</pre><pre class="rust"><code><span class="attribute">#![warn(clippy::all)]
+#![warn(clippy::pedantic)]
+#![warn(clippy::cargo)]
+#![allow(clippy::option_if_let_else)]
+#![allow(unknown_lints)]
+#![warn(missing_docs)]
+#![warn(missing_debug_implementations)]
+#![warn(missing_copy_implementations)]
+#![warn(rust_2018_idioms)]
+#![warn(rust_2021_compatibility)]
+#![warn(trivial_casts, trivial_numeric_casts)]
+#![warn(unsafe_op_in_unsafe_fn)]
+#![warn(unused_qualifications)]
+#![warn(variant_size_differences)]
+</span><span class="comment">// Enable feature callouts in generated documentation:
 // https://doc.rust-lang.org/beta/unstable-book/language-features/doc-cfg.html
 //
 // This approach is borrowed from tokio.
-</span><span class="attribute">#![cfg_attr(docsrs, feature(doc_cfg))]</span>
-<span class="attribute">#![cfg_attr(docsrs, feature(doc_alias))]</span>
+</span><span class="attribute">#![cfg_attr(docsrs, feature(doc_cfg))]
+#![cfg_attr(docsrs, feature(doc_alias))]
 
-<span class="doccomment">//! A wrapper around the decomposed parts of a `Vec&lt;T&gt;`.
+</span><span class="doccomment">//! A wrapper around the decomposed parts of a `Vec&lt;T&gt;`.
 //!
 //! This crate defines a struct that contains the `Vec`&#39;s internal pointer,
 //! length, and allocated capacity.
@@ -468,13 +468,13 @@
 //!
 //! raw-parts is `no_std` compatible with a required dependency on [`alloc`].
 
-</span><span class="attribute">#![no_std]</span>
-<span class="attribute">#![doc(html_root_url = <span class="string">&quot;https://docs.rs/raw-parts/1.1.1&quot;</span>)]</span>
+</span><span class="attribute">#![no_std]
+#![doc(html_root_url = <span class="string">&quot;https://docs.rs/raw-parts/1.1.1&quot;</span>)]
 
-<span class="comment">// Ensure code blocks in `README.md` compile
-</span><span class="attribute">#[cfg(doctest)]</span>
-<span class="attribute">#[doc = <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]</span>
-<span class="kw">mod </span>readme {}
+</span><span class="comment">// Ensure code blocks in `README.md` compile
+</span><span class="attribute">#[cfg(doctest)]
+#[doc = <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]
+</span><span class="kw">mod </span>readme {}
 
 <span class="kw">extern crate </span>alloc;
 
@@ -609,8 +609,8 @@
     /// };
     /// assert_eq!(rebuilt, [4294967295, 0, 1]);
     /// ```
-    </span><span class="attribute">#[must_use]</span>
-    <span class="kw">pub fn </span>from_vec(vec: Vec&lt;T&gt;) -&gt; RawParts&lt;T&gt; {
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>from_vec(vec: Vec&lt;T&gt;) -&gt; RawParts&lt;T&gt; {
         <span class="comment">// TODO: convert to `Vec::into_raw_parts` once it is stabilized.
         // See: https://doc.rust-lang.org/1.56.0/src/alloc/vec/mod.rs.html#717-720
         //
@@ -689,9 +689,9 @@
     ///     assert_eq!(rebuilt, [4, 5, 6]);
     /// }
     /// ```
-    </span><span class="attribute">#[must_use]</span>
-    <span class="attribute">#[allow(clippy::needless_pass_by_value)]</span>
-    <span class="kw">pub unsafe fn </span>into_vec(this: <span class="self">Self</span>) -&gt; Vec&lt;T&gt; {
+    </span><span class="attribute">#[must_use]
+    #[allow(clippy::needless_pass_by_value)]
+    </span><span class="kw">pub unsafe fn </span>into_vec(this: <span class="self">Self</span>) -&gt; Vec&lt;T&gt; {
         <span class="kw">let </span><span class="self">Self </span>{
             ptr,
             length,
@@ -706,15 +706,15 @@
     }
 }
 
-<span class="attribute">#[cfg(test)]</span>
-<span class="kw">mod </span>tests {
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
     <span class="kw">use </span>alloc::format;
     <span class="kw">use </span>alloc::vec::Vec;
 
     <span class="kw">use </span><span class="kw">crate</span>::RawParts;
 
-    <span class="attribute">#[test]</span>
-    <span class="kw">fn </span>roundtrip() {
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>roundtrip() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
         </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
 
@@ -728,8 +728,8 @@
         <span class="macro">assert_eq!</span>(roundtripped_vec.as_mut_ptr(), raw_ptr);
     }
 
-    <span class="attribute">#[test]</span>
-    <span class="kw">fn </span>from_vec_sets_ptr() {
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>from_vec_sets_ptr() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
         </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
         </span><span class="kw">let </span>ptr = vec.as_mut_ptr();
@@ -738,8 +738,8 @@
         <span class="macro">assert_eq!</span>(raw_parts.ptr, ptr);
     }
 
-    <span class="attribute">#[test]</span>
-    <span class="kw">fn </span>from_vec_sets_length() {
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>from_vec_sets_length() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
         </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
 
@@ -747,8 +747,8 @@
         <span class="macro">assert_eq!</span>(raw_parts.length, <span class="number">9</span>);
     }
 
-    <span class="attribute">#[test]</span>
-    <span class="kw">fn </span>from_vec_sets_capacity() {
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>from_vec_sets_capacity() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
         </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
 
@@ -756,8 +756,8 @@
         <span class="macro">assert_eq!</span>(raw_parts.capacity, <span class="number">100</span>);
     }
 
-    <span class="attribute">#[test]</span>
-    <span class="kw">fn </span>debug_test() {
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>debug_test() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
         </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
         </span><span class="kw">let </span>raw_parts = RawParts::from_vec(vec);
@@ -771,8 +771,8 @@
         );
     }
 
-    <span class="attribute">#[test]</span>
-    <span class="kw">fn </span>partial_eq_fail_pointer() {
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>partial_eq_fail_pointer() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec_1 = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
         </span>vec_1.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
         </span><span class="kw">let </span><span class="kw-2">mut </span>vec_2 = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
@@ -783,8 +783,8 @@
         <span class="macro">assert_ne!</span>(raw_parts_1, raw_parts_2);
     }
 
-    <span class="attribute">#[test]</span>
-    <span class="kw">fn </span>partial_eq_fail_capacity() {
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>partial_eq_fail_capacity() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec_1 = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
         </span>vec_1.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
         </span><span class="kw">let </span><span class="kw-2">mut </span>vec_2 = Vec::with_capacity(<span class="number">101</span>); <span class="comment">// capacity is 101
@@ -795,8 +795,8 @@
         <span class="macro">assert_ne!</span>(raw_parts_1, raw_parts_2);
     }
 
-    <span class="attribute">#[test]</span>
-    <span class="kw">fn </span>partial_eq_fail_length() {
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>partial_eq_fail_length() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec_1 = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
         </span>vec_1.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
         </span><span class="kw">let </span><span class="kw-2">mut </span>vec_2 = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
@@ -807,8 +807,8 @@
         <span class="macro">assert_ne!</span>(raw_parts_1, raw_parts_2);
     }
 
-    <span class="attribute">#[test]</span>
-    <span class="kw">fn </span>partial_eq_pass() {
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>partial_eq_pass() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
         </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
 
@@ -831,4 +831,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="raw_parts" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (86c6ebee8 2022-08-16)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="raw_parts" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (060e47f74 2022-08-23)" ></div></body></html>
