@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["RawParts","A wrapper around the decomposed parts of a `Vec<T>`."]]};
+window.SIDEBAR_ITEMS = {"struct":["RawParts"]};
