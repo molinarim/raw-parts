@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/lib.rs`."><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-c67e44d78ab2db17.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="raw_parts" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0-nightly (0e2dac837 2023-12-04)" data-channel="nightly" data-search-js="search-5a66c239c06b3a66.js" data-settings-js="settings-fe03fdc259827cd2.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-77dede896d6ac08e.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/lib.rs`."><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-e883e87179a81222.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="raw_parts" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0-nightly (3340d49d2 2023-12-12)" data-channel="nightly" data-search-js="search-cca444cbb68c36e9.js" data-settings-js="settings-fe03fdc259827cd2.js" ><script src="../../static.files/storage-bc37acceda91d44a.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-77dede896d6ac08e.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -437,7 +437,7 @@
 
 </span><span class="doccomment">//! A wrapper around the decomposed parts of a `Vec&lt;T&gt;`.
 //!
-//! This crate defines a struct that contains the `Vec`&#39;s internal pointer,
+//! This crate defines a struct that contains the `Vec`'s internal pointer,
 //! length, and allocated capacity.
 //!
 //! [`RawParts`] makes [`Vec::from_raw_parts`] and [`Vec::into_raw_parts`] easier
@@ -469,11 +469,11 @@
 //! raw-parts is `no_std` compatible with a required dependency on [`alloc`].
 
 </span><span class="attr">#![no_std]
-#![doc(html_root_url = <span class="string">&quot;https://docs.rs/raw-parts/1.1.1&quot;</span>)]
+#![doc(html_root_url = <span class="string">"https://docs.rs/raw-parts/1.1.1"</span>)]
 
 </span><span class="comment">// Ensure code blocks in `README.md` compile
 </span><span class="attr">#[cfg(doctest)]
-#[doc = <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]
+#[doc = <span class="macro">include_str!</span>(<span class="string">"../README.md"</span>)]
 </span><span class="kw">mod </span>readme {}
 
 <span class="kw">extern crate </span>alloc;
@@ -485,7 +485,7 @@
 
 <span class="doccomment">/// A wrapper around the decomposed parts of a `Vec&lt;T&gt;`.
 ///
-/// This struct contains the `Vec`&#39;s internal pointer, length, and allocated
+/// This struct contains the `Vec`'s internal pointer, length, and allocated
 /// capacity.
 ///
 /// `RawParts` makes [`Vec::from_raw_parts`] and [`Vec::into_raw_parts`] easier
@@ -518,7 +518,7 @@
     /// the source vector.
     </span><span class="kw">pub </span>ptr: <span class="kw-2">*mut </span>T,
     <span class="doccomment">/// The number of elements in the source vector, also referred to as its
-    /// &quot;length&quot;.
+    /// "length".
     ///
     /// This value is the same as the value returned by [`Vec::len`] in the
     /// source vector.
@@ -538,11 +538,11 @@
 }
 
 <span class="kw">impl</span>&lt;T&gt; fmt::Debug <span class="kw">for </span>RawParts&lt;T&gt; {
-    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; fmt::Result {
-        fmt.debug_struct(<span class="string">&quot;RawParts&quot;</span>)
-            .field(<span class="string">&quot;ptr&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.ptr)
-            .field(<span class="string">&quot;length&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.length)
-            .field(<span class="string">&quot;capacity&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.capacity)
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; fmt::Result {
+        fmt.debug_struct(<span class="string">"RawParts"</span>)
+            .field(<span class="string">"ptr"</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.ptr)
+            .field(<span class="string">"length"</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.length)
+            .field(<span class="string">"capacity"</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.capacity)
             .finish()
     }
 }
@@ -569,7 +569,7 @@
 // ```
 // impl&lt;T&gt; From&lt;RawParts&lt;T&gt;&gt; for Vec&lt;T&gt; {
 //     fn from(raw_parts: RawParts&lt;T&gt;) -&gt; Self {
-//         // ERROR: this requires `unsafe`, which we don&#39;t want to hide in a
+//         // ERROR: this requires `unsafe`, which we don't want to hide in a
 //         // `From` impl.
 //         from(raw_parts)
 //     }
@@ -635,11 +635,11 @@
     /// This function has the same safety invariants as [`Vec::from_raw_parts`],
     /// which are repeated in the following paragraphs.
     ///
-    /// This is highly unsafe, due to the number of invariants that aren&#39;t
+    /// This is highly unsafe, due to the number of invariants that aren't
     /// checked:
     ///
     /// * `ptr` needs to have been previously allocated via [`String`]/`Vec&lt;T&gt;`
-    ///   (at least, it&#39;s highly likely to be incorrect if it wasn&#39;t).
+    ///   (at least, it's highly likely to be incorrect if it wasn't).
     /// * `T` needs to have the same size and alignment as what `ptr` was allocated with.
     ///   (`T` having a less strict alignment is not sufficient, the alignment really
     ///   needs to be equal to satisfy the [`dealloc`] requirement that memory must be
@@ -647,13 +647,13 @@
     /// * `length` needs to be less than or equal to `capacity`.
     /// * `capacity` needs to be the capacity that the pointer was allocated with.
     ///
-    /// Violating these may cause problems like corrupting the allocator&#39;s
+    /// Violating these may cause problems like corrupting the allocator's
     /// internal data structures. For example it is **not** safe
     /// to build a `Vec&lt;u8&gt;` from a pointer to a C `char` array with length `size_t`.
-    /// It&#39;s also not safe to build one from a `Vec&lt;u16&gt;` and its length, because
+    /// It's also not safe to build one from a `Vec&lt;u16&gt;` and its length, because
     /// the allocator cares about the alignment, and these two types have different
     /// alignments. The buffer was allocated with alignment 2 (for `u16`), but after
-    /// turning it into a `Vec&lt;u8&gt;` it&#39;ll be deallocated with alignment 1.
+    /// turning it into a `Vec&lt;u8&gt;` it'll be deallocated with alignment 1.
     ///
     /// The ownership of `ptr` is effectively transferred to the
     /// `Vec&lt;T&gt;` which may then deallocate, reallocate or change the
@@ -716,7 +716,7 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>roundtrip() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
-        </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
+        </span>vec.extend_from_slice(<span class="string">b"123456789"</span>); <span class="comment">// length is 9
 
         </span><span class="kw">let </span>raw_parts = RawParts::from_vec(vec);
         <span class="kw">let </span>raw_ptr = raw_parts.ptr;
@@ -731,7 +731,7 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>from_vec_sets_ptr() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
-        </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
+        </span>vec.extend_from_slice(<span class="string">b"123456789"</span>); <span class="comment">// length is 9
         </span><span class="kw">let </span>ptr = vec.as_mut_ptr();
 
         <span class="kw">let </span>raw_parts = RawParts::from_vec(vec);
@@ -741,7 +741,7 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>from_vec_sets_length() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
-        </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
+        </span>vec.extend_from_slice(<span class="string">b"123456789"</span>); <span class="comment">// length is 9
 
         </span><span class="kw">let </span>raw_parts = RawParts::from_vec(vec);
         <span class="macro">assert_eq!</span>(raw_parts.length, <span class="number">9</span>);
@@ -750,7 +750,7 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>from_vec_sets_capacity() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
-        </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
+        </span>vec.extend_from_slice(<span class="string">b"123456789"</span>); <span class="comment">// length is 9
 
         </span><span class="kw">let </span>raw_parts = RawParts::from_vec(vec);
         <span class="macro">assert_eq!</span>(raw_parts.capacity, <span class="number">100</span>);
@@ -759,24 +759,24 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>debug_test() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
-        </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
+        </span>vec.extend_from_slice(<span class="string">b"123456789"</span>); <span class="comment">// length is 9
         </span><span class="kw">let </span>raw_parts = RawParts::from_vec(vec);
 
         <span class="macro">assert_eq!</span>(
             <span class="macro">format!</span>(
-                <span class="string">&quot;RawParts {{ ptr: {:?}, length: 9, capacity: 100 }}&quot;</span>,
+                <span class="string">"RawParts {{ ptr: {:?}, length: 9, capacity: 100 }}"</span>,
                 raw_parts.ptr
             ),
-            <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, raw_parts)
+            <span class="macro">format!</span>(<span class="string">"{:?}"</span>, raw_parts)
         );
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>partial_eq_fail_pointer() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec_1 = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
-        </span>vec_1.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
+        </span>vec_1.extend_from_slice(<span class="string">b"123456789"</span>); <span class="comment">// length is 9
         </span><span class="kw">let </span><span class="kw-2">mut </span>vec_2 = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
-        </span>vec_2.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
+        </span>vec_2.extend_from_slice(<span class="string">b"123456789"</span>); <span class="comment">// length is 9
 
         </span><span class="kw">let </span>raw_parts_1 = RawParts::from_vec(vec_1);
         <span class="kw">let </span>raw_parts_2 = RawParts::from_vec(vec_2);
@@ -786,9 +786,9 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>partial_eq_fail_capacity() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec_1 = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
-        </span>vec_1.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
+        </span>vec_1.extend_from_slice(<span class="string">b"123456789"</span>); <span class="comment">// length is 9
         </span><span class="kw">let </span><span class="kw-2">mut </span>vec_2 = Vec::with_capacity(<span class="number">101</span>); <span class="comment">// capacity is 101
-        </span>vec_2.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
+        </span>vec_2.extend_from_slice(<span class="string">b"123456789"</span>); <span class="comment">// length is 9
 
         </span><span class="kw">let </span>raw_parts_1 = RawParts::from_vec(vec_1);
         <span class="kw">let </span>raw_parts_2 = RawParts::from_vec(vec_2);
@@ -798,9 +798,9 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>partial_eq_fail_length() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec_1 = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
-        </span>vec_1.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
+        </span>vec_1.extend_from_slice(<span class="string">b"123456789"</span>); <span class="comment">// length is 9
         </span><span class="kw">let </span><span class="kw-2">mut </span>vec_2 = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
-        </span>vec_2.extend_from_slice(<span class="string">b&quot;12345678&quot;</span>); <span class="comment">// length is 8
+        </span>vec_2.extend_from_slice(<span class="string">b"12345678"</span>); <span class="comment">// length is 8
 
         </span><span class="kw">let </span>raw_parts_1 = RawParts::from_vec(vec_1);
         <span class="kw">let </span>raw_parts_2 = RawParts::from_vec(vec_2);
@@ -810,7 +810,7 @@
     <span class="attr">#[test]
     </span><span class="kw">fn </span>partial_eq_pass() {
         <span class="kw">let </span><span class="kw-2">mut </span>vec = Vec::with_capacity(<span class="number">100</span>); <span class="comment">// capacity is 100
-        </span>vec.extend_from_slice(<span class="string">b&quot;123456789&quot;</span>); <span class="comment">// length is 9
+        </span>vec.extend_from_slice(<span class="string">b"123456789"</span>); <span class="comment">// length is 9
 
         </span><span class="kw">let </span>RawParts {
             ptr,
