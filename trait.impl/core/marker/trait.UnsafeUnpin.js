@@ -1,9 +1,9 @@
 (function() {
-    const implementors = Object.fromEntries([["raw_parts",[["impl&lt;T&gt; UnsafeUnpin for <a class=\"struct\" href=\"raw_parts/struct.RawParts.html\" title=\"struct raw_parts::RawParts\">RawParts</a>&lt;T&gt;",0,1,["raw_parts::RawParts"]]]]]);
+    const implementors = Object.fromEntries([["raw_parts",[["impl&lt;T&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/marker/trait.UnsafeUnpin.html\" title=\"trait core::marker::UnsafeUnpin\">UnsafeUnpin</a> for <a class=\"struct\" href=\"raw_parts/struct.RawParts.html\" title=\"struct raw_parts::RawParts\">RawParts</a>&lt;T&gt;",0,1,["raw_parts::RawParts"]]]]]);
     if (window.register_implementors) {
         window.register_implementors(implementors);
     } else {
         window.pending_implementors = implementors;
     }
 })()
-//{"start":59,"fragment_lengths":[196]}
+//{"start":59,"fragment_lengths":[339]}
